@@ -13,7 +13,7 @@ User.init({
   email: DataTypes.STRING,
   password: DataTypes.TEXT,
   nickname: DataTypes.STRING,
-  age: DataTypes.INTEGER,
+  age: DataTypes.DATEONLY,
   level: DataTypes.INTEGER
 }, 
 { 

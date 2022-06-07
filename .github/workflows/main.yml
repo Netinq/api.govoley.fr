@@ -33,18 +33,18 @@ jobs:
               echo "runing the docker image"
               echo "Testing the nodejs  app endpoints"
               echo ${{ steps.docker_build.outputs.digest }}
-  # Deploy_To_Server:
-  #     needs: Push_To_Docker
-  #     runs-on: ubuntu-latest
-  #     steps:
-  #       - name: Deploy
-  #         uses: appleboy/ssh-action@master
-  #         with:
-  #           host: ${{ secrets.HOST }}
-  #           username: ${{ secrets.USERNAME }}
-  #           password: ${{ secrets.PASSWORD }}
-  #           script: |
-  #             cd statussarquentinfr
-  #             docker-compose stop || docker rmi netinq/api.govolley.fr:latest
-  #             docker pull netinq/api.govolley.fr:latest
-  #             docker-compose up -d
+  Deploy_To_Server:
+      needs: Push_To_Docker
+      runs-on: ubuntu-latest
+      steps:
+        - name: Deploy
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            password: ${{ secrets.PASSWORD }}
+            script: |
+              cd devgovolleyfr
+              docker-compose stop || docker rmi netinq/api.govolley.fr:latest
+              docker pull netinq/api.govolley.fr:latest
+              docker-compose up -d

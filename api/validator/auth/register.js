@@ -27,12 +27,12 @@ const schema = Joi.object({
             "string.empty": `Le champ ne peu pas être vide`,
             "any.required": `Le champ est requis`
           }),
-          age: Joi.number()
+          age: Joi.date()
             .required()
             .empty()
             .messages({
-              "number.base": `Le champ est invalide`,
-              "number.empty": `Le champ ne peu pas être vide`,
+              "date.base": `Le champ est invalide`,
+              "date.empty": `Le champ ne peu pas être vide`,
               "any.required": `Le champ est requis`
             }),
             level: Joi.number()

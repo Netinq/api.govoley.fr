@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 const tokenVerify = require('../middlewares/token');
 const User = require('../../database/models/User');
-const JWT = require('../tools/JWT');
+const JWT = require('../tools/jwt');
 
 async function login(request, response)
 {

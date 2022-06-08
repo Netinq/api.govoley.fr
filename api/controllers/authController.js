@@ -20,7 +20,7 @@ async function login(request, response)
   const verifyPasswd = await bcrypt.compare(request.body.password, user.password);
   if (!verifyPasswd) return new ErrorMessage('Le mot de passe est invalide !', 'password').send(response);
 
-  const token = await JWT(user);
+  const token = JWT(user);
 
   return response.json({
     token: token,
@@ -50,7 +50,7 @@ async function register(request, response)
 
   await user.save();
 
-  const token = await JWT(user);
+  const token = JWT(user);
 
   return response.json({
     token: token,

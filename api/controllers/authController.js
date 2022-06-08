@@ -9,28 +9,18 @@ const JWT = require('../tools/jwt');
 
 async function login(request, response)
 {
-  console.log('TOKEN')
   await tokenVerify(request, response);
-  console.log('TOKEN OK')
   
-  console.log('BODY')
   const {error} = validatorLogin.validate(request.body);
   if (error) return new ErrorMessage(error.details[0].message,error.details[0].context.key).send(response);
-  console.log('BODY OK')
 
-  console.log('FIND')
   const user = await User.findOne({ where: {email: request.body.email},attributes: {include: ['password']}});
   if (!user) return new ErrorMessage('Nous ne trouvons pas l\'adresse email !', 'email').send(response);
-  console.log('FIND OK')
 
-  console.log('PASS')
   const verifyPasswd = await bcrypt.compare(request.body.password, user.password);
   if (!verifyPasswd) return new ErrorMessage('Le mot de passe est invalide !', 'password').send(response);
-  console.log('PASS OK')
 
-  console.log('JWT')
   const token = JWT(user);
-  console.log('JWT OK')
 
   return response.json({
     token: token,

@@ -1,27 +1,36 @@
-const ErrorMessage = require('../constructors/errorMessage');
-const SuccessMessage = require('../constructors/successMessage');
-
-const tokenVerify = require('../middlewares/token');
+const ErrorMessage = require('../constructors/ErrorMessage');
 
 const Areas = require('../../database/models/Areas');
-const validator = require('../validator/sport');
 
-async function store(request, response) {
+async function Store(req, res) {
+
+  const adress = 
+
+  const area = new Areas({
+    area_surface: req.area_surface,
+    areas_nb: req.areas_nb,
+    adress: adress,
+    latitude: req.latitude,
+    longitude: req.longitude,
+  })
+}
+
+async function update(req, res) {
   
 }
 
-async function update(request, response) {
+async function show(req, res) {
   
 }
 
-async function show(request, response) {
+async function getByPosition(req, res) {
   
 }
 
-async function getByPosition(request, response) {
+async function destroy(req, res) {
   
 }
 
-async function destroy(request, response) {
-  
+module.exports = {
+  Store,
 }

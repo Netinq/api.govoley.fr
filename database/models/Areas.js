@@ -1,26 +1,22 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../connection');
+const AreaSurfaces = require('./AreaSurfaces')
+const AreaFeatures = require('./AreaFeatures')
 
 class Areas extends Model {}
 
 Areas.init({
 
-    area_uuid: {
-        primaryKey: true,
-        type: DataTypes.UUID,
-        defaultValue: require("sequelize").UUIDV4
-    },
-    adress: DataTypes.STRING,
-    activated: DataTypes.BOOLEAN,
-    indoor: DataTypes.BOOLEAN,
-    cover: DataTypes.BOOLEAN,
-    post: DataTypes.BOOLEAN,
-    draw_line: DataTypes.BOOLEAN,
-    net: DataTypes.BOOLEAN,
-    water_point: DataTypes.BOOLEAN,
-    latitude: DataTypes.DECIMAL(9, 6),
-    longitude: DataTypes.DECIMAL(9, 6),
-
+  area_uuid: {
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: require("sequelize").UUIDV4
+  },
+  area_surface: DataTypes.BIGINT,
+  areas_nb: DataTypes.SMALLINT,
+  adress: DataTypes.TEXT,
+  latitude: DataTypes.DECIMAL(9, 6),
+  longitude: DataTypes.DECIMAL(9, 6),
 }, 
 { 
   sequelize: sequelize, 
@@ -28,5 +24,10 @@ Areas.init({
   createdAt: 'created_at',
   updatedAt: 'updated_at',
 });
+
+Areas.hasOne(AreaSurfaces, { foreignKey: 'area_surface' })
+Areas.belongsTo(AreaFeatures)
+
+AreaSurfaces.belongsTo(Areas)
 
 module.exports = Areas;

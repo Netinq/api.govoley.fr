@@ -1,16 +1,13 @@
-const ErrorMessage = require('../constructors/errorMessage');
+const ErrorMessage = require('../constructors/ErrorMessage');
 const validatorLogin = require('../validator/auth/login');
 const validatorRegister = require('../validator/auth/register');
 const bcrypt = require('bcryptjs');
 
-const tokenVerify = require('../middlewares/token');
 const User = require('../../database/models/User');
 const JWT = require('../tools/jwt');
 
-async function login(request, response)
+async function Login(request, response)
 {
-  await tokenVerify(request, response);
-  
   const {error} = validatorLogin.validate(request.body);
   if (error) return new ErrorMessage(error.details[0].message,error.details[0].context.key).send(response);
 
@@ -27,10 +24,8 @@ async function login(request, response)
   })
 }
 
-async function register(request, response)
+async function Register(request, response)
 {
-  await tokenVerify(request, response);
-  
   const {error} = validatorRegister.validate(request.body);
   if (error) return new ErrorMessage(error.details[0].message,error.details[0].context.key).send(response);
 
@@ -58,6 +53,6 @@ async function register(request, response)
 }
 
 module.exports = {
-  login,
-  register,
+  Login,
+  Register,
 };

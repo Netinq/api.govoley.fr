@@ -1,4 +1,4 @@
-const { ErrorMessage } = require('../constructors/ErrorMessage');
+const ErrorMessage = require('../constructors/ErrorMessage');
 
 module.exports = async (req, res, next) => {
   const token = req.header("app-token");

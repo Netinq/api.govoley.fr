@@ -25,9 +25,5 @@ Areas.init({
   updatedAt: 'updated_at',
 });
 
-Areas.hasOne(AreaSurfaces, { foreignKey: 'area_surface' })
-Areas.belongsTo(AreaFeatures)
-
-AreaSurfaces.belongsTo(Areas)
 
 module.exports = Areas;

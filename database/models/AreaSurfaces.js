@@ -1,6 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../connection');
-const Areas = require('./Areas');
 
 class AreaSurfaces extends Model {}
 
@@ -17,6 +16,6 @@ AreaSurfaces.init({
   modelName: 'AreaSurfaces', 
   createdAt: 'created_at',
   updatedAt: 'updated_at',
-});
+})
 
 module.exports = AreaSurfaces;

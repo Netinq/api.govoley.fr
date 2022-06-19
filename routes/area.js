@@ -11,7 +11,7 @@ router.post('/',
   async (req, res) => Store(req, res)
 );
 
-router.get('/near',
+router.post('/near',
   async (req, res, next) => AppToken(req, res, next),
   async (req, res) => Near(req, res)
 )

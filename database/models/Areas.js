@@ -21,7 +21,7 @@ Areas.init({
 }, 
 { 
   sequelize: sequelize, 
-  modelName: 'Areas', 
+  modelName: 'area', 
   createdAt: 'created_at',
   updatedAt: 'updated_at',
 });

@@ -1,7 +1,8 @@
-const ErrorMessage = require('../constructors/ErrorMessage');
-const SuccessMessage = require('../constructors/SuccessMessage');
+const ErrorMessage = require('../constructors/errorMessage');
+const SuccessMessage = require('../constructors/successMessage');
 const NodeGeocoder = require('node-geocoder');
 const Areas = require('../../database/models/Areas');
+const sequelize = require('../../database/connection')
 
 async function Store(req, res) {
 
@@ -28,6 +29,13 @@ async function Store(req, res) {
   })
 }
 
+async function Near(req, res) {
+
+  const areas = await sequelize.query(`SELECT ROUND(6371 * acos (cos ( radians(${req.body.latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${req.body.longitude}) ) + sin ( radians(${req.body.latitude}) ) * sin( radians( latitude ) ))) AS distance,areas.* FROM areas HAVING distance <=${req.body.distance}`)
+  
+  res.json(areas)
+}
+
 async function update(req, res) {
   
 }
@@ -46,4 +54,5 @@ async function destroy(req, res) {
 
 module.exports = {
   Store,
+  Near
 }

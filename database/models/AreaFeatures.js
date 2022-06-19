@@ -14,7 +14,7 @@ AreaFeatures.init({
 }, 
 { 
   sequelize: sequelize, 
-  modelName: 'AreaFeatures', 
+  modelName: 'area_features', 
   createdAt: 'created_at',
   updatedAt: 'updated_at',
   });

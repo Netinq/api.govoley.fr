@@ -13,7 +13,7 @@ AreaSurfaces.init({
 }, 
 { 
   sequelize: sequelize, 
-  modelName: 'AreaSurfaces', 
+  modelName: 'area_surface', 
   createdAt: 'created_at',
   updatedAt: 'updated_at',
 })

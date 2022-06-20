@@ -32,7 +32,7 @@ async function Register(request, response)
   const exist = await User.findOne({ where: {email: request.body.email} });
   if(exist) return new ErrorMessage('Un compte existe déjà avec cette adresse email !', 'email').send(response);
 
-  const salt = await bcrypt.genSalt(16);
+  const salt = await bcrypt.genSalt(12);
   const hashPassword = await bcrypt.hash(request.body.password, salt);
 
   const user = new User({

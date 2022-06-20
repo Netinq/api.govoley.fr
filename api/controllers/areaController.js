@@ -32,7 +32,7 @@ async function Store(req, res) {
 
 async function Near(req, res) {
 
-  const areas = await sequelize.query(`SELECT ROUND(6371 * acos (cos ( radians(${req.body.latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${req.body.longitude}) ) + sin ( radians(${req.body.latitude}) ) * sin( radians( latitude ) ))) AS distance,areas.*,area_surfaces.name FROM areas INNER JOIN area_surfaces ON areas.area_surface = area_surfaces.surface_id HAVING distance <=${req.body.distance}`, { type: QueryTypes.SELECT })
+  const areas = await sequelize.query(`SELECT ROUND(6371 * acos (cos ( radians(${req.body.latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${req.body.longitude}) ) + sin ( radians(${req.body.latitude}) ) * sin( radians( latitude ) ))) AS distance,areas.*,area_surfaces.name AS surface FROM areas INNER JOIN area_surfaces ON areas.area_surface = area_surfaces.surface_id HAVING distance <=${req.body.distance}`, { type: QueryTypes.SELECT })
   
   res.json(areas)
 }

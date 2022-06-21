@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const { Login, Register } = require('../api/controllers/authController');
 const AppToken = require('../api/middlewares/AppToken');
+const UserToken = require('../api/middlewares/UserToken');
 
 router.post('/login',
   async (req, res, next) => AppToken(req, res, next),

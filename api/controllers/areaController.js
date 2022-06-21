@@ -11,6 +11,8 @@ async function Store(req, res) {
     provider: 'openstreetmap',
   };
 
+  console.log('SIZE '+req.header('Content-Length'))
+
   const geocoder = NodeGeocoder(options);
   const json = await geocoder.reverse({lat: req.body.latitude, lon: req.body.longitude})
   const adress = `${json[0].neighbourhood} ${json[0].streetName}, ${json[0].zipcode} ${json[0].city}, ${json[0].country}`

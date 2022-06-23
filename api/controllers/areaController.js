@@ -3,15 +3,13 @@ const SuccessMessage = require('../constructors/successMessage');
 const NodeGeocoder = require('node-geocoder');
 const Areas = require('../../database/models/Areas');
 const sequelize = require('../../database/connection');
-const { QueryTypes } = require('sequelize');
+const { QueryTypes, where } = require('sequelize');
 
 async function Store(req, res) {
 
   const options = {
     provider: 'openstreetmap',
   };
-
-  console.log('SIZE '+req.header('Content-Length'))
 
   const geocoder = NodeGeocoder(options);
   const json = await geocoder.reverse({lat: req.body.latitude, lon: req.body.longitude})
@@ -43,8 +41,11 @@ async function update(req, res) {
   
 }
 
-async function show(req, res) {
+async function Show(req, res) {
   
+  const area = await Areas.findOne({ where: { area_uuid: req.params.area_uuid } });
+  res.json(area)
+
 }
 
 async function getByPosition(req, res) {
@@ -57,5 +58,6 @@ async function destroy(req, res) {
 
 module.exports = {
   Store,
-  Near
+  Near,
+  Show
 }

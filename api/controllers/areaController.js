@@ -4,6 +4,7 @@ const NodeGeocoder = require('node-geocoder');
 const Areas = require('../../database/models/Areas');
 const sequelize = require('../../database/connection');
 const { QueryTypes, where } = require('sequelize');
+const AreaSurfaces = require('../../database/models/AreaSurfaces');
 
 async function Store(req, res) {
 
@@ -43,7 +44,9 @@ async function update(req, res) {
 
 async function Show(req, res) {
   
-  const area = await Areas.findOne({ where: { area_uuid: req.params.area_uuid } });
+  const area = await Areas.findOne({
+    where: { area_uuid: req.params.area_uuid }, include: [{ model: AreaSurfaces, as: 'surface', attributes: ['name'] }]
+  });
   res.json(area)
 
 }

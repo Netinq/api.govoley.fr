@@ -12,7 +12,9 @@ Areas.init({
       type: DataTypes.UUID,
       defaultValue: require("sequelize").UUIDV4
   },
-  area_surface: DataTypes.BIGINT,
+  area_surface: {
+    type: DataTypes.BIGINT,
+  },
   areas_nb: DataTypes.SMALLINT,
   adress: DataTypes.TEXT,
   latitude: DataTypes.DECIMAL(9, 6),
@@ -24,7 +26,6 @@ Areas.init({
   modelName: 'area', 
   createdAt: 'created_at',
   updatedAt: 'updated_at',
-});
-
+  });
 
 module.exports = Areas;

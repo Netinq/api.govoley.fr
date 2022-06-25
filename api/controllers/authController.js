@@ -4,7 +4,8 @@ const validatorRegister = require('../validator/auth/register');
 const bcrypt = require('bcryptjs');
 
 const User = require('../../database/models/User');
-const JWT = require('../tools/jwt');
+const jwtGenerator = require('../tools/jwt');
+const JWT = require("jsonwebtoken");
 
 async function Login(req, res)
 {
@@ -17,7 +18,7 @@ async function Login(req, res)
   const verifyPasswd = await bcrypt.compare(req.body.password, user.password);
   if (!verifyPasswd) return new ErrorMessage('Le mot de passe est invalide !', 'password').send(res);
 
-  const token = JWT(user);
+  const token = jwtGenerator(user);
 
   return res.json({token: token})
 }
@@ -43,12 +44,18 @@ async function Register(req, res)
 
   await user.save();
 
-  const token = JWT(user);
+  const token = jwtGenerator(user);
 
   return res.json({token: token})
+}
+
+async function getUser(req, res)
+{
+  res.json(JWT.decode(req.header("user-token")))
 }
 
 module.exports = {
   Login,
   Register,
+  getUser
 };

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { Login, Register } = require('../api/controllers/authController');
+const { Login, Register, getUser } = require('../api/controllers/authController');
 const AppToken = require('../api/middlewares/AppToken');
 const UserToken = require('../api/middlewares/UserToken');
 
@@ -17,5 +17,10 @@ router.get('/checkToken',
   async (req, res, next) => UserToken(req, res, next),
   async (req, res) => res.json({ "status": 'ok' })
 );
+router.get('/',
+async (req, res, next) => AppToken(req, res, next),
+async (req, res, next) => UserToken(req, res, next),
+async (req, res) => { getUser(req, res) }
+)
 
 module.exports = router;

@@ -23,7 +23,8 @@ async function Store(req, res) {
     adress: adress,
     latitude: req.body.latitude,
     longitude: req.body.longitude,
-    image_data: data
+    image_data: data,
+    expired_at: req.body.expired_at
   })
 
   area.save().then(() => {

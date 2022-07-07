@@ -19,7 +19,8 @@ Areas.init({
   adress: DataTypes.TEXT,
   latitude: DataTypes.DECIMAL(9, 6),
   longitude: DataTypes.DECIMAL(9, 6),
-  image_data: DataTypes.BLOB('long')
+  image_data: DataTypes.BLOB('long'),
+  expired_at: DataTypes.DATE,
 }, 
 { 
   sequelize: sequelize, 
